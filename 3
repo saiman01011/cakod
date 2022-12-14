@@ -1,0 +1,48 @@
+#include <iostream>
+#include<stack>
+#include<string>
+using namespace std;
+bool qwe(char a, stack <char>& asd) {
+    if (asd.size()==0)return false;
+    int  w = asd.top(), e = a;
+    w++;
+    if (asd.size() == 0)return false;
+    if (w == e) {
+        asd.pop();
+        return true;
+    }
+    else {
+        w++;
+        if (w == e) {
+            asd.pop();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
+int main() {
+    stack <char> asd;
+    bool z = true;
+    string a;
+    int s;
+    getline(cin,a);
+    for (int i = 0;a.size()>i; i++) {
+        s = a[i];
+        if (s >= 65 && s <= 90 && z == true && asd.size() == 0) z = false;
+        else {
+            if (a[i] == '(' || a[i] == '[' || a[i] == '{')asd.push(a[i]);
+            else {
+                if (qwe(a[i], asd));
+                else {
+                    if (s >= 97 && s <= 122 && z == false && asd.size() == 0)z = true;
+                    else return 0;
+                }
+            }
+        }
+    }
+    if (asd.size() == 0) {
+        cout << "yes";
+    }
+}
