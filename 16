@@ -1,0 +1,72 @@
+#include <iostream>
+#include<set>
+void zxc(int &big,int &en,int *zx) {
+    for (int w = 1; w < en - big; w++) {
+        if (zx[big] == zx[big + w]) {
+            big = big++;
+            w = 1;
+        }
+    }
+}
+using namespace std;
+int main() {
+    set<int>asd;
+    int a,big=0,en=0,ma=0;
+    cin >> a;
+    int *zx = new int[a];
+    for (int q = 0; q < a; q++) {
+        //zx[q] = rand() % 12 + 1;
+        //cout << zx[q]<<" ";
+        cin >> zx[q];
+        if (ma < zx[q])ma = zx[q];
+    }
+    for (int q = 0; q < a; q++) {
+        cout << q+1<<".  " << zx[q] << endl;
+    }
+    for (int q = 0; q < a; q++) {
+        asd.insert(zx[q]);
+        if (asd.size() == ma) {
+            en = q;
+            zxc(big,en,zx);
+            /*for (int w = 0; w<en - big; w++) {
+                if (zx[big] == zx[big + w]) {
+                    big = big++;
+                    w = 0;
+                }
+            }*/
+            break;
+        }
+        if (q == a-1)cout << "No";
+    }
+    asd.erase(asd.begin(), asd.end());
+    for (int w = big, q =en; q < a&&en -big+1!=ma; q++,w++) {
+        for (int e = 0; e<q - w;e++) {
+            asd.insert(zx[w+e]);
+            if (asd.size() == ma) {
+                big = w;
+                en = q;
+                zxc(big, en, zx);
+                w = big;
+                q = en;
+                w++;
+                break;
+            }
+        }
+        asd.erase(asd.begin(), asd.end());
+    }
+    if (en == 0)cout << "No";
+    else {
+        cout << endl;
+        cout << ++big << " " << en;
+    }
+}
+
+
+/*В массиве из N целых чисел от 1 до K (K < N) найти самое
+левое вхождение самого короткого отрезка, в который входят все
+числа от 1 до K, или сказать, что таких отрезков нет.
+      Дано число N (1 < N < 10^6) и N целых чисел от 1 до K ( 0 < K <
+N). K - заранее не известно.
+      Выведите координаты концов отрезка (в 1 индексации), или
+сообщите, что искомого отрезка нет.
+*/
