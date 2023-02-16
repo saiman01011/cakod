@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+void qwe(int *asd,int a,int c) {
+	for (int w = 1; w < a ; a--) {
+		for (int q = a; q > 2;) {
+			if (asd[q / 2] < asd[q])swap(asd[q / 2], asd[q]);
+			if (asd[q / 2] < asd[q - 1])swap(asd[q / 2], asd[q - 1]);
+			q -= 2;
+		}
+		swap(asd[a], asd[1]);
+	}
+}
+int main(){
+	int a,b=2;
+	cin >> a;
+	int* asd = new int[a+1];
+	for (int q = 1; q < a+1; q++)asd[q] = rand()%10;
+	for (int q = 1; q < a+1; q++) {
+		cout << asd[q] << "  ";
+	}
+	asd[0] = 1111;
+	cout << endl;
+	for (int w = 0; w < a; w++) {
+		for (int q = a-w; q > 1; q -= 2) {
+			if (asd[q / 2] < asd[q])swap(asd[q / 2], asd[q]);
+			if (asd[q / 2] < asd[q - 1])swap(asd[q / 2], asd[q - 1]);
+		}
+		swap(asd[a-w], asd[1]);
+	}
+	for (int q = 1; q < a + 1; q++) {
+		cout << asd[q] << "  ";
+	}
+}
